@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TremorArtist } from "../../types/SpotifyState";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import Image from "mui-image";

@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, ListItem, Typography } from "@mui/material";
 import { Track } from "@spotify/web-api-ts-sdk";
 
@@ -7,13 +6,13 @@ type TrackItemProps = {
   index: number;
 };
 
-const getMMSSFromMS = (ms: number) => {
-  const seconds = ms / 1000;
-  const minutes = Math.floor(seconds / 60);
-  const secondsRem = Math.round(seconds % 60);
+// const getMMSSFromMS = (ms: number) => {
+//   const seconds = ms / 1000;
+//   const minutes = Math.floor(seconds / 60);
+//   const secondsRem = Math.round(seconds % 60);
 
-  return `${minutes}:${secondsRem}`;
-};
+//   return `${minutes}:${secondsRem}`;
+// };
 
 export const TrackItem = ({ track, index }: TrackItemProps) => {
   return (

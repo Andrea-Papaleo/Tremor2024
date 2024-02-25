@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { useSpotify } from "./features/spotify/useSpotify";
 import { Scopes } from "@spotify/web-api-ts-sdk";
-import type {
-  Artist,
-  AudioFeatures,
-  SpotifyApi,
-  Track,
-} from "@spotify/web-api-ts-sdk";
+import type { AudioFeatures, SpotifyApi, Track } from "@spotify/web-api-ts-sdk";
 import { TremorArtist } from "./types/SpotifyState";
-import { useAppDispatch } from "./app/hooks";
 import { spotifySlice } from "./features/spotify/spotifySlice";
 import { Container } from "@mui/material";
 import { MainAppBar } from "./components/MainAppBar";
@@ -22,7 +16,9 @@ import { appStateSlice } from "./features/app-state/appStateSlice";
 
 function App() {
   const sdk = useSpotify(
+    // @ts-ignore
     import.meta.env.VITE_SPOTIFY_CLIENT_ID,
+    //@ts-ignore
     import.meta.env.VITE_REDIRECT_TARGET,
     Scopes.userDetails,
   );
@@ -33,8 +29,6 @@ function App() {
 function SpotifySearch({ sdk }: { sdk: SpotifyApi }) {
   const dispatch = useDispatch();
   const dataLoaded = useSelector(selectDataLoadedState);
-  const [tracks, setTracks] = useState<Track[]>([]);
-  const [artists, setArtists] = useState<TremorArtist[]>([]);
 
   useEffect(() => {
     const get = async () => {
@@ -102,8 +96,6 @@ function SpotifySearch({ sdk }: { sdk: SpotifyApi }) {
       dispatch(spotifySlice.actions.addAudioFeatures({ audioFeatures }));
       dispatch(spotifySlice.actions.setArtistMeasurables());
       dispatch(appStateSlice.actions.setDataLoaded({ dataLoaded: true }));
-      setTracks(tracks);
-      setArtists(artists);
     };
 
     if (!dataLoaded) {

@@ -20,10 +20,7 @@ export const TabsComponent = ({
   ...tabsProps
 }: TabsComponentProps) => {
   const [tabIndex, setTabIndex] = useState(0);
-  const handleTabChange = (
-    event: React.SyntheticEvent<Element, Event>,
-    newValue: number,
-  ) => {
+  const handleTabChange = (newValue: number) => {
     setTabIndex(newValue);
     secondaryEffect && secondaryEffect(labels[newValue]);
   };
@@ -37,24 +34,24 @@ export const TabsComponent = ({
           })}
         </div>
       );
-    }).filter((child, idx) => !disabledTabs?.includes(idx));
+    }).filter((_, idx) => !disabledTabs?.includes(idx));
     return <>{StyledChildren}</>;
   };
 
   return (
     <TabContext.Provider value={tabIndex}>
       <Box
-        sx={theme => ({
+        sx={{
           width: "100%",
           flexGrow: 1,
           overflowX: "hidden",
-        })}
+        }}
       >
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             {...tabsProps}
             value={tabIndex}
-            onChange={handleTabChange}
+            onChange={(_, newValue) => handleTabChange(newValue)}
             aria-label="tabbed-view"
             variant="fullWidth"
           >
@@ -64,7 +61,6 @@ export const TabsComponent = ({
                   key={`Tab-${childClassName}-tab-${idx}`}
                   label={label}
                   disabled={disabledTabs && disabledTabs.includes(idx)}
-                  sx={theme => ({})}
                 />
               ) : (
                 label
@@ -75,7 +71,7 @@ export const TabsComponent = ({
         <TabPanel value={tabIndex} index={0}>
           <Box
             display="flex"
-            sx={theme => ({
+            sx={{
               minWidth: "100%",
               maxHeight: "calc(100vh - 60px)",
 
@@ -83,7 +79,7 @@ export const TabsComponent = ({
                 minWidth: "100%",
                 maxWidth: "100%",
               },
-            })}
+            }}
           >
             {addClass(children)}
           </Box>

@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { selectAllArtists } from "../../features/spotify/spotifySelectors";
 import { Box, Grid } from "@mui/material";
 import { ArtistCard } from "../../components/ArtistCard/ArtistCard";

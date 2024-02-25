@@ -1,4 +1,3 @@
-import React from "react";
 import { AppBar, Box, ButtonBase, Toolbar, Typography } from "@mui/material";
 import { GraphicEqRounded as GraphicEqRoundedIcon } from "@mui/icons-material";
 

@@ -6,8 +6,6 @@ import {
   trackAdapter,
 } from "./spotifySlice";
 import { AudioFeatures } from "@spotify/web-api-ts-sdk";
-import { ParcedAudioFeatures } from "../../types/ParcedAudioFeatures";
-import { IncludeFieldType } from "../../types/util";
 
 const artistSelectors = artistAdapter.getSelectors(
   (state: RootState) => state.spotify.artists,

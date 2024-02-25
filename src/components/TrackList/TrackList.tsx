@@ -1,35 +1,13 @@
-import React, {
-  MouseEventHandler,
-  ReactElement,
-  useEffect,
-  useState,
-} from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { TrackItem } from "./TrackItem/TrackItem";
-import { Box, List, ListItem, Typography } from "@mui/material";
+import { List, Typography } from "@mui/material";
 import { Track } from "@spotify/web-api-ts-sdk";
-import { useAppSelector } from "../../app/hooks";
 import { selectTrackEntities } from "../../features/spotify/spotifySelectors";
 import { useSelector } from "react-redux";
 
 type TrackListProps = {
   trackIds: string[];
 };
-
-const trackFeatures = [
-  "Name",
-  "Duration",
-  "Danceability",
-  "Acousticness",
-  "Energy",
-  "Instrumentalness",
-  "Key",
-  "Liveness",
-  "Loudness",
-  "Speechiness",
-  "Time Signature",
-  "Tempo",
-  "Valence",
-];
 
 export const TrackFeature = ({
   feature,

@@ -3,12 +3,7 @@ import {
   createSlice,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import {
-  Artist,
-  AudioFeatures,
-  Playlist,
-  Track,
-} from "@spotify/web-api-ts-sdk";
+import { AudioFeatures, Track } from "@spotify/web-api-ts-sdk";
 import { TremorArtist, SpotifyState } from "../../types/SpotifyState";
 import { ArtistMeasurables } from "../../types/ArtistMeasurables";
 
@@ -44,7 +39,7 @@ export const spotifySlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    reset(state, action: PayloadAction<{}>) {
+    reset(state) {
       Object.assign(state, spotifySlice.getInitialState());
     },
 

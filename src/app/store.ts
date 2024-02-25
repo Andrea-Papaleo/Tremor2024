@@ -1,9 +1,4 @@
-import type { Action, ThunkAction } from "@reduxjs/toolkit";
-import {
-  combineReducers,
-  combineSlices,
-  configureStore,
-} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { spotifySlice } from "../features/spotify/spotifySlice";
 import storage from "redux-persist/lib/storage";
