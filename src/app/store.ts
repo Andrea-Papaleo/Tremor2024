@@ -1,11 +1,21 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
-import { combineSlices, configureStore } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  combineSlices,
+  configureStore,
+} from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { counterSlice } from "../features/counter/counterSlice";
+import { spotifySlice } from "../features/spotify/spotifySlice";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import { appStateSlice } from "../features/app-state/appStateSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice);
+const rootReducer = combineReducers({
+  spotify: spotifySlice.reducer,
+  appState: appStateSlice.reducer,
+});
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -27,15 +37,24 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
   return store;
 };
 
-export const store = makeStore();
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  devTools: true,
+  middleware: getDefaultMiddleware => {
+    return getDefaultMiddleware(); //.concat(quotesApiSlice.middleware)
+  },
+});
+
+export const persistor = persistStore(store);
 
 // Infer the type of `store`
 export type AppStore = typeof store;
 // Infer the `AppDispatch` type from the store itself
 export type AppDispatch = AppStore["dispatch"];
-export type AppThunk<ThunkReturnType = void> = ThunkAction<
-  ThunkReturnType,
-  RootState,
-  unknown,
-  Action
->;

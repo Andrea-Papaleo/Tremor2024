@@ -15,7 +15,6 @@ export function useSpotify(
   const { current: activeScopes } = useRef(scopes);
 
   useEffect(() => {
-    console.log(clientId);
     (async () => {
       const auth = new AuthorizationCodeWithPKCEStrategy(
         clientId,
