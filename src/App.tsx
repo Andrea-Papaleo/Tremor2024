@@ -19,7 +19,9 @@ function App() {
     // @ts-ignore
     import.meta.env.VITE_SPOTIFY_CLIENT_ID,
     //@ts-ignore
-    import.meta.env.VITE_REDIRECT_TARGET,
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://iloveTremor2024.netlify.app",
     Scopes.userDetails,
   );
 
